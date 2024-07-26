@@ -135,6 +135,20 @@ void DartDumper::Dump4Radare2(std::filesystem::path outDir)
 		}
 		show_library = true;
 	}
+	for (auto& item : app.stubs) {
+		auto stub = item.second;
+		const auto ep = stub->Address();
+		auto name = stub->FullName();
+		std::replace(name.begin(), name.end(), '<', '_');
+		std::replace(name.begin(), name.end(), '>', '_');
+		std::replace(name.begin(), name.end(), ',', '_');
+		std::replace(name.begin(), name.end(), ' ', '_');
+		std::replace(name.begin(), name.end(), '$', '_');
+		std::replace(name.begin(), name.end(), '&', '_');
+		std::replace(name.begin(), name.end(), '-', '_');
+		std::replace(name.begin(), name.end(), '+', '_');
+		of << std::format("f method.{}={:#x}\n", name.c_str(), ep);
+	}
 }
 
 void DartDumper::Dump4Ida(std::filesystem::path outDir)
