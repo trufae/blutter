@@ -98,7 +98,6 @@ static bool is_valid_char(const char ch) {
 	case '$':
 	case '%':
 	case '@':
-	case ' ':
 	case '.':
 	case ',':
 	case ':':
