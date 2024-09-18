@@ -170,14 +170,14 @@ void DartDumper::Dump4Radare2(std::filesystem::path outDir)
 		}
 		show_library = true;
 	}
-	of << "f pptr=0\n"; // TODO: hardcoded value
+	of << "f pptr=x27\n"; // TODO: hardcoded value
 	auto comments = DumpStructHeaderFile((outDir / "r2_dart_struct.h").string());
 	for (const auto& [offset, comment] : comments) {
 		if (comment.find("String:") != -1) {
 			std::string flagFromComment = comment;
 			filterString(flagFromComment);
 			of << "f pp." << flagFromComment << "=pptr+" << offset << "\n";
-			of << "'0x0+pptr+" << offset << "CC " << comment << "\n";
+			of << "'@" << offset << "'CC " << comment << "\n";
 		}
 	}
 }
