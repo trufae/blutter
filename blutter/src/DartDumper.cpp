@@ -184,6 +184,8 @@ void DartDumper::Dump4Radare2(std::filesystem::path outDir)
 			of << "'@0x0+" << offset << "'CC " << comment << "\n";
 		}
 	}
+	of << "# Define functions\n";
+	of << "af@@method.* \n";
 }
 
 void DartDumper::Dump4Ida(std::filesystem::path outDir)
